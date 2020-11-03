@@ -3,7 +3,7 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
 const sql = require('mssql');
-const config = {
+/* const config = {
   user: 'spark',
   password: 'spark',
   server: 'MXL30INBOWHD7Y2',
@@ -14,7 +14,7 @@ const config = {
     idleTimeoutMillis: 30000
   }
 }
-
+ */
 const port = 3000
 
 app.get('/', (req, res) => {
@@ -24,59 +24,61 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
 
   console.log('a user connected...');
-  let pool = sql.connect(config)
+  sql.connect("mssql://spark:spark@MXL30INBOWHD7Y2/SparkDB-IND");
+
+  sql.on('error', err => {
+    console.log("ERROR: La conexión no fue establecida correctamente")
+  })
 
   socket.on('getInfo', () => {
 
+    //console.log("info")
     try {
-      let result1 = pool.request()
-        .query(`
+      new sql.Request().query(`
               
           SELECT TOP 10 Machine, Variable, Max, Min, Measure, NotSat 
           FROM HydraDataL3_Catalog
               
-        `)
+          `, (err, result1) => {
 
-      let info = Object.values(result1)[1];
-      console.dir(result1)
+        if (err) { throw new Error('Failed SQL'); }
 
-      io.to(socket.id).emit('information', info)
+        let info = Object.values(result1)[1];
+        //console.dir(info)
+
+        io.to(socket.id).emit('information', info)
+
+      });
 
     } catch (err) {
-      // ... error checks
+      console.log("ERROR: La query no fue elaborada correctamente")
     }
-
-    sql.on('error', err => {
-      // ... error handler
-    })
-
   })
 
   socket.on('getValues', () => {
 
+    //console.log("info")
     try {
-      let result2 = pool.request()
-        .query(`
+      new sql.Request().query(`
               
           SELECT TOP 6 Time, Variable, Value
           FROM HydraDataL3
           WHERE Variable in('Cycle','Good','PeakPrs','Mcushion','InjTime','Recovtime')
           ORDER BY Time DESC
               
-        `)
+          `, (err, result2) => {
 
-      let val = Object.values(result2)[1];
-      console.dir(result2)
+        if (err) { throw new Error('Failed SQL'); }
 
-      io.to(socket.id).emit('values', val)
+        let val = Object.values(result2)[1];
+        //console.dir(val)
 
+        io.to(socket.id).emit('values', val)
+
+      });
     } catch (err) {
-      // ... error checks
+      console.log("ERROR: La query no fue elaborada correctamente")
     }
-
-    sql.on('error', err => {
-      // ... error handler
-    })
 
   })
 

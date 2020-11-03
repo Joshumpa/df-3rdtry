@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-//import openSocket from 'socket.io-client'
+import Gaugelist from './GaugeList'
+import openSocket from 'socket.io-client'
 
-//const socket = openSocket("http://localhost:3000/")
+const socket = openSocket("http://localhost:3000/")
 
 class Graphics extends Component {
 
     state ={
-        data: []
+        info: []
+    }
+
+    componentDidMount(){
+        socket.on('getInfo', (info) => {
+            
+            this.setState({info})
+        })
     }
 
     render() {
@@ -16,9 +24,9 @@ class Graphics extends Component {
                 <Container>
 
                     <Row>
-                        <Col>ssssssssssssssssssssssssssssssssssssssssssssss</Col>
-                        <Col>ssssssssssssssssssssssssssssssssssssssssssssss</Col>
-                        <Col>ssssssssssssssssssssssssssssssssssssssssssssss</Col>
+                        <Gaugelist
+                            info={this.state.info}
+                        />
                     </Row>
                     <Row>
                         <Col xs="3">.col-3</Col>
