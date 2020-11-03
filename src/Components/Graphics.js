@@ -7,13 +7,17 @@ const socket = openSocket("http://localhost:3000/")
 
 class Graphics extends Component {
 
-    state ={
-        info: []
+    constructor(props){
+        super(props)
+
+        this.state ={
+            info: []
+        }
     }
 
     componentDidMount(){
         socket.on('getInfo', (info) => {
-            
+
             this.setState({info})
         })
     }
