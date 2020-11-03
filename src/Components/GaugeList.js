@@ -1,5 +1,7 @@
 import React from 'react'
 import Gauge from './Gauge'
+import { Col } from 'reactstrap';
+
 
 function GaugeList(props) {
     return (
@@ -7,15 +9,17 @@ function GaugeList(props) {
             {
                 props.gauges.map((gauge) => {
                     return (
-                        <Gauge
-                            Variable={gauge.Variable}
-                            Value={gauge.Value}
-                            Max={gauge.Max}
-                            Min={gauge.Min}
-                            Measure={gauge.Measure}
-                            MajorTicks={gauge.MajorTicks}
-                            Highlights={gauge.Highlights}
-                        />
+                        <Col>
+                            <Gauge
+                                Variable={gauge.Variable}
+                                Value={gauge.Value}
+                                Max={gauge.Max}
+                                Min={gauge.Min}
+                                Measure={gauge.Measure}
+                                MajorTicks={gauge.MajorTicks}
+                                Highlights={gauge.Highlights}
+                            />
+                        </Col>
                     )
                 })
             }

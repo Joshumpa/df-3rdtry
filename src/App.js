@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-import { Container, Row } from 'reactstrap'
-import Header from './Components/Header'
-
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Layout from './Containers/layout'
 class App extends Component {
   render(){
     return (
       <React.Fragment>
-        <Header />
-          <Container>
-            <Row>
-              <p>Molding Machines</p>
-            </Row>
-          </Container>
+        <BrowserRouter>
+          <Switch>
+            <Route path = "/" component = {Layout}/>
+          </Switch>
+        </BrowserRouter>
       </React.Fragment>
     );
   }

@@ -5,7 +5,7 @@ import 'canvas-gauges/gauge.min.js'
 class Gauge extends React.Component {
 
     render() {
-        const { Variable, Value, Max, Min, Measure, MajorTicks, Highlights } = this.props
+        const { Variable, Max, Min, Measure, MajorTicks, Highlights } = this.props
         return (
             <canvas data-type="radial-gauge"
                 data-width="300"
@@ -14,7 +14,7 @@ class Gauge extends React.Component {
                 data-title={Variable}
                 data-min-value={Min}
                 data-max-value={Max}
-                data-value={Value}
+                data-value="0"
                 data-major-ticks={MajorTicks}
                 data-minor-ticks="2"
                 data-stroke-ticks="true"
