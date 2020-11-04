@@ -43,10 +43,12 @@ io.on('connection', (socket) => {
 
         if (err) { throw new Error('Failed SQL'); }
 
-        let info = Object.values(result1)[1];
+        result1 = Object.values(result1)[1];
+        let info = result1.filter(obj => obj.Variable !== "Good")
+        let good = 0
         //console.dir(info)
 
-        io.to(socket.id).emit('information', info)
+        io.to(socket.id).emit('information', {info, good})
 
       });
 
@@ -70,10 +72,12 @@ io.on('connection', (socket) => {
 
         if (err) { throw new Error('Failed SQL'); }
 
-        let val = Object.values(result2)[1];
+        result2 = Object.values(result2)[1];
+        let val = result2.filter(obj => obj.Variable !== "Good")
+        let good = result2.filter(obj => obj.Variable === "Good")
         //console.dir(val)
 
-        io.to(socket.id).emit('values', val)
+        io.to(socket.id).emit('values', {val, good})
 
       });
     } catch (err) {

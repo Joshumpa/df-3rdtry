@@ -4,7 +4,7 @@ import { Col } from 'reactstrap';
 
 const Gauge = ({ Variable, Max, Min, Measure, MajorTicks, Highlights }) => {
 
-    <Col>
+    <Col xs="5">
         <canvas data-type="radial-gauge"
             data-width="300"
             data-height="300"
