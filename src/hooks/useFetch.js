@@ -11,7 +11,7 @@ const useFetch = (event) => {
     useEffect(() => {
         const fetchResource = async () => {
             try {
-                socket.on(event, data => {
+                await socket.on(event, data => {
                     setData(data)
                 })
                 setLoading(false)

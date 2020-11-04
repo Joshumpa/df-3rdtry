@@ -2,15 +2,15 @@ import React, { Fragment } from 'react'
 import Goods from '../Components/Goods'
 import GaugeList from '../Components/GaugeList'
 
-const Exercises = ({data}) => (
+const Graphics = (data) => (
     <Fragment>
         <Goods 
             goods={data.good}
         />
         <GaugeList 
-            exercises={data.info}
+            info={data.info}
         />
     </Fragment>
 )
 
-export default Exercises
+export default Graphics
