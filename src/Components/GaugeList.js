@@ -3,7 +3,7 @@ import Gauge from './Gauge'
 //import { Col } from 'reactstrap';
 
 
-const GaugeList = (info) => {
+const GaugeList = ({info}) => {
     <Fragment>
         { info.map((gauge) => (
             <Gauge

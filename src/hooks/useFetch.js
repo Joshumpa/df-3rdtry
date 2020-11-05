@@ -1,30 +1,28 @@
 import { useState, useEffect } from 'react'
-import openSocket from 'socket.io-client'
+import io from 'socket.io-client';
 
-const socket = openSocket("http://localhost:3000/")
+const socket = io('http://localhost:3000', {
+    transports: ['websocket', 'polling']
+});
 
 const useFetch = (event) => {
-    const [ data, setData ] = useState([])
-    const [ loading, setLoading ] = useState(true)
-    const [ error, setError ] = useState(null)
+    const [data, setData] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
-        const fetchResource = async () => {
-            try {
-                await socket.on(event, data => {
-                    setData(data)
-                })
-                setLoading(false)
-            } catch (error) {
-                setLoading(false)
-                setError(error)
-            }
+        try {
+            socket.on(event, data => {
+                setData(data)
+            })
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+            setError(error)
         }
-        fetchResource()
-    })
+    }, [event])
 
     return { data, loading, error }
 }
-
 
 export default useFetch

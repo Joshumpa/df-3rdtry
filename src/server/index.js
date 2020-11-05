@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
         result1 = Object.values(result1)[1];
         let info = result1.filter(obj => obj.Variable !== "Good")
         let good = 0
-        //console.dir(info)
+        console.dir(info)
 
         io.to(socket.id).emit('information', {info, good})
 
