@@ -5,7 +5,11 @@ import Graphics from './Graphics'
 import useFetch from '../hooks/useFetch'
 
 const GraphicsContainer = () => {
-    const { data, loading, error } = useFetch("getInfo")
+    let events = {
+        client: "getInfo",
+        server: "information"
+    }
+    const { data, loading, error } = useFetch(events)
 
     if(loading)
         return <Loading />

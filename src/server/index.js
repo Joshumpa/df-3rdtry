@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
         result2 = Object.values(result2)[1];
         let val = result2.filter(obj => obj.Variable !== "Good")
         let good = result2.filter(obj => obj.Variable === "Good")
-        //console.dir(val)
+        console.dir(val)
 
         io.to(socket.id).emit('values', {val, good})
 
@@ -88,7 +88,6 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log('...user disconnected');
-    sql.close()
   });
 
 });

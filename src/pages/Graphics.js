@@ -5,10 +5,10 @@ import GaugeList from '../Components/GaugeList'
 const Graphics = ({data}) => (
     <Fragment>
         <Goods 
-            goods={data[1]}
+            goods={data["good"]}
         />
         <GaugeList 
-            info={data[0]}
+            info={data["info"]}
         />
     </Fragment>
 )
