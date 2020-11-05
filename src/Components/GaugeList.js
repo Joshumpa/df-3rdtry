@@ -5,7 +5,7 @@ import Gauge from './Gauge'
 
 const GaugeList = ({info}) => {
     <Fragment>
-        { info.map((gauge) => (
+        { info?.map((gauge) => (
             <Gauge
                 key = {gauge.id}
                 {...gauge}
