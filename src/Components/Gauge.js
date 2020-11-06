@@ -2,21 +2,21 @@ import React from 'react'
 import 'canvas-gauges/gauge.min.js'
 import { Col } from 'reactstrap';
 
-const Gauge = ({ Variable, Max, Min, Measure, MajorTicks, Highlights }) => {
+const Gauge = ( data ) => (
 
     <Col xs="5">
         <canvas data-type="radial-gauge"
             data-width="300"
             data-height="300"
-            data-units={Measure}
-            data-title={Variable}
-            data-min-value={Min}
-            data-max-value={Max}
+            data-units={data.Measure}
+            data-title={data.Variable}
+            data-min-value={data.Min}
+            data-max-value={data.Max}
             data-value="0"
-            data-major-ticks={MajorTicks}
+            data-major-ticks={data.MajorTicks}
             data-minor-ticks="2"
             data-stroke-ticks="true"
-            data-highlights={Highlights}
+            data-highlights={data.Highlights}
             data-color-plate="#fff"
             data-border-shadow-width="0"
             data-borders="false"
@@ -29,6 +29,6 @@ const Gauge = ({ Variable, Max, Min, Measure, MajorTicks, Highlights }) => {
             data-animation-rule="linear"
         ></canvas>
     </Col>
-}
+)
 
 export default Gauge

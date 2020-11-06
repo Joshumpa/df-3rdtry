@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Row } from 'reactstrap'
 import { Route, Switch } from 'react-router-dom'
+import 'canvas-gauges/gauge.min.js'
 
 import Header from '../Components/Header'
 

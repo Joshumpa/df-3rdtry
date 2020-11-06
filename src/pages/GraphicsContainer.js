@@ -3,6 +3,7 @@ import Loading from '../Components/Loading'
 import FatalError from './500'
 import Graphics from './Graphics'
 import useFetch from '../hooks/useFetch'
+import 'canvas-gauges/gauge.min.js'
 
 const GraphicsContainer = () => {
     let events = {
@@ -10,6 +11,8 @@ const GraphicsContainer = () => {
         server: "information"
     }
     const { data, loading, error } = useFetch(events)
+
+    console.log(data)
 
     if(loading)
         return <Loading />

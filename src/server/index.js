@@ -46,7 +46,33 @@ io.on('connection', (socket) => {
         result1 = Object.values(result1)[1];
         let info = result1.filter(obj => obj.Variable !== "Good")
         let good = 0
-        console.dir(info)
+        //console.dir(info)
+        const calcTicks = (max) => {
+          if(max>0 && max<1.5){
+            return Array.from({length: (max*10)+1}, (_, i) => i*.1)
+          }
+          if(max>=1.5 && max<5){
+            return Array.from({length: (max/.5)+1}, (_, i) => i*.5)
+          }
+          if(max>=5 && max<10){
+            return Array.from({length: (max)+1}, (_, i) => i*1)
+          }
+          if(max>=10 && max<30){
+            return Array.from({length: (max/5)+1}, (_, i) => i*5)
+          }
+          if(max>=30 && max<150){
+            return Array.from({length: (max/10)+1}, (_, i) => i*10)
+          }
+          if(max>=150){
+            return Array.from({length: (max/100)+1}, (_, i) => i*100)
+          }
+        }
+        const calcHighlights = (NotSat) => {
+          return `[{"from": 0, "to": ${NotSat}, "color": "rgba(200, 50, 50, .75)"}]`
+        }
+        
+        info = info.map(element => ({...element, MajorTicks: calcTicks(element["Max"]), Highlights: calcHighlights(element["NotSat"])}))
+
 
         io.to(socket.id).emit('information', {info, good})
 
@@ -75,8 +101,8 @@ io.on('connection', (socket) => {
         result2 = Object.values(result2)[1];
         let val = result2.filter(obj => obj.Variable !== "Good")
         let good = result2.filter(obj => obj.Variable === "Good")
-        console.dir(val)
-
+        //console.dir(val)
+        
         io.to(socket.id).emit('values', {val, good})
 
       });
@@ -95,20 +121,3 @@ io.on('connection', (socket) => {
 http.listen(port, () => {
   console.log(`listening on *: ${port}`);
 });
-
-/*
-let max1 = .6
-console.log(Array.from({length: (max1*10)+1}, (_, i) => i*.1));
-console.log((max1*10)+1);
-
-let max2 = 2
-console.log(Array.from({length: (max2/.5)+1}, (_, i) => i*.5));
-
-let max3 = 30
-console.log(Array.from({length: (max3/10)+1}, (_, i) => i*10));
-
-let max4 = 700
-console.log(Array.from({length: (max4/100)+1}, (_, i) => i*100));
-*/
-
-
