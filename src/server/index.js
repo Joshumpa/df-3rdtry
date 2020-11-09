@@ -3,18 +3,7 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
 const sql = require('mssql');
-/* const config = {
-  user: 'spark',
-  password: 'spark',
-  server: 'MXL30INBOWHD7Y2',
-  database: 'SparkDB-IND',
-  pool: {
-    max: 10,
-    min: 0,
-    idleTimeoutMillis: 30000
-  }
-}
- */
+
 const port = 3000
 
 app.get('/', (req, res) => {

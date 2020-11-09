@@ -1,7 +1,7 @@
 import React from 'react'
 import 'canvas-gauges/gauge.min.js'
 
-function Gauge({ Variable, Max, Min, Measure, MajorTicks, NotSat }) {
+function Gauge({ Variable, Max, Min, Measure, MajorTicks, NotSat, Value }) {
 
     return (
         <canvas data-type="radial-gauge"
@@ -9,7 +9,7 @@ function Gauge({ Variable, Max, Min, Measure, MajorTicks, NotSat }) {
             data-height="220"
             data-units={Measure}
             data-title={Variable}
-            data-min-value="0"
+            data-min-value={Value}
             data-max-value={Max}
             data-value="0"
             data-major-ticks={MajorTicks}
