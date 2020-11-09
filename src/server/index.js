@@ -48,33 +48,34 @@ io.on('connection', (socket) => {
         let good = 0
         //console.dir(info)
         const calcTicks = (max) => {
-          if(max>0 && max<1.5){
-            return Array.from({length: (max*10)+1}, (_, i) => i*.1)
+          if (max > 0 && max < 1.5) {
+            let arr = Array.from({ length: (max * 10) + 1 }, (_, i) => i * .1);
+            arr = arr.map(function (each_element) {
+              return Number(each_element.toFixed(2));
+            });
+            return arr
           }
-          if(max>=1.5 && max<5){
-            return Array.from({length: (max/.5)+1}, (_, i) => i*.5)
+          if (max >= 1.5 && max < 5) {
+            return Array.from({ length: (max / .5) + 1 }, (_, i) => i * .5)
           }
-          if(max>=5 && max<10){
-            return Array.from({length: (max)+1}, (_, i) => i*1)
+          if (max >= 5 && max < 10) {
+            return Array.from({ length: (max) + 1 }, (_, i) => i * 1)
           }
-          if(max>=10 && max<30){
-            return Array.from({length: (max/5)+1}, (_, i) => i*5)
+          if (max >= 10 && max < 30) {
+            return Array.from({ length: (max / 5) + 1 }, (_, i) => i * 5)
           }
-          if(max>=30 && max<150){
-            return Array.from({length: (max/10)+1}, (_, i) => i*10)
+          if (max >= 30 && max < 150) {
+            return Array.from({ length: (max / 10) + 1 }, (_, i) => i * 10)
           }
-          if(max>=150){
-            return Array.from({length: (max/100)+1}, (_, i) => i*100)
+          if (max >= 150) {
+            return Array.from({ length: (max / 100) + 1 }, (_, i) => i * 100)
           }
         }
-        const calcHighlights = (NotSat) => {
-          return `[{"from": 0, "to": ${NotSat}, "color": "rgba(200, 50, 50, .75)"}]`
-        }
-        
-        info = info.map(element => ({...element, MajorTicks: calcTicks(element["Max"]), Highlights: calcHighlights(element["NotSat"])}))
+
+        info = info.map(element => ({ ...element, MajorTicks: calcTicks(element["Max"]) }))
 
 
-        io.to(socket.id).emit('information', {info, good})
+        io.to(socket.id).emit('information', { info, good })
 
       });
 
@@ -102,8 +103,8 @@ io.on('connection', (socket) => {
         let val = result2.filter(obj => obj.Variable !== "Good")
         let good = result2.filter(obj => obj.Variable === "Good")
         //console.dir(val)
-        
-        io.to(socket.id).emit('values', {val, good})
+
+        io.to(socket.id).emit('values', { val, good })
 
       });
     } catch (err) {

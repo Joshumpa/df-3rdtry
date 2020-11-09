@@ -1,15 +1,20 @@
 import React, { Fragment } from 'react'
 import Goods from '../Components/Goods'
 import GaugeList from '../Components/GaugeList'
+import { Row } from 'reactstrap'
 
-const Graphics = ({data}) => (
+const Graphics = ({ data }) => (
     <Fragment>
-        <Goods 
-            goods={data["good"]}
-        />
-        <GaugeList 
-            info={data["info"]}
-        />
+            <Row>
+                <Goods
+                    goods={data["good"]}
+                />
+            </Row>
+            <Row>
+                <GaugeList
+                    info={data["info"]}
+                />
+            </Row>
     </Fragment>
 )
 

@@ -5,23 +5,26 @@ const socket = io('http://localhost:3000', {
     transports: ['websocket', 'polling']
 });
 
-const useFetch = (events) => {
+const useFetch = ({ client, server }) => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        try {
-            socket.emit(events.client, null)
-            socket.on(events.server, data => {
+        const fetchResource = async () => {
+            try {
+                await socket.emit(client, null)
+                await socket.on(server, data => {
+                    setLoading(false)
+                    setData(data)
+                })
+            } catch (error) {
                 setLoading(false)
-                setData(data)
-            })
-        } catch (error) {
-            setLoading(false)
-            setError(error)
+                setError(error)
+            }
         }
-    }, [events])
+        fetchResource()
+    }, [client, server])
 
     return { data, loading, error }
 }

@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import Gauge from './Gauge'
-//import { Col } from 'reactstrap';
 
 
 const GaugeList = ({info}) => (

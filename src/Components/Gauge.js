@@ -1,22 +1,24 @@
 import React from 'react'
 import 'canvas-gauges/gauge.min.js'
-import { Col } from 'reactstrap';
 
-const Gauge = ( data ) => (
+function Gauge({ Variable, Max, Min, Measure, MajorTicks, NotSat }) {
 
-    <Col xs="5">
+    return (
         <canvas data-type="radial-gauge"
-            data-width="300"
-            data-height="300"
-            data-units={data.Measure}
-            data-title={data.Variable}
-            data-min-value={data.Min}
-            data-max-value={data.Max}
+            data-width="220"
+            data-height="220"
+            data-units={Measure}
+            data-title={Variable}
+            data-min-value="0"
+            data-max-value={Max}
             data-value="0"
-            data-major-ticks={data.MajorTicks}
+            data-major-ticks={MajorTicks}
             data-minor-ticks="2"
             data-stroke-ticks="true"
-            data-highlights={data.Highlights}
+            data-highlights={`[
+                {"from": 0, "to": ${NotSat}, "color": "rgba(200, 50, 50, .75)"},
+                {"from": ${NotSat}, "to": ${Min}, "color": "rgba(200, 200, 50, .75)"}
+            ]`}
             data-color-plate="#fff"
             data-border-shadow-width="0"
             data-borders="false"
@@ -28,7 +30,7 @@ const Gauge = ( data ) => (
             data-animation-duration="1500"
             data-animation-rule="linear"
         ></canvas>
-    </Col>
-)
+    )
+}
 
 export default Gauge
