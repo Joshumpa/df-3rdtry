@@ -26,3 +26,19 @@ const GraphicsContainer = () => {
 }
 
 export default GraphicsContainer
+
+/* 
+
+var timers = [];
+
+function animateGauges() {
+    document.gauges.forEach(function(gauge) {
+        timers.push(setInterval(function() {
+            gauge.value = Math.random() *
+                (gauge.options.maxValue - gauge.options.minValue) +
+                gauge.options.minValue;
+        }, gauge.animation.duration + 50));
+    });
+}
+
+*/
