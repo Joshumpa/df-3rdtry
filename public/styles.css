@@ -1,0 +1,60 @@
+body{
+    background-color: #E7E7E7!important;
+}
+a{
+    text-decoration: none;
+}
+.logo{
+    width: 8rem;
+}
+.nav{
+    background-color: #4A4F55;
+    padding: 0px !important;
+}
+.nav-brand{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 6%;
+    background-color: #EA8300;
+}
+.nav-item{
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+.container{
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column wrap;
+    max-width: 90% !important;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.status{
+    display: flex;
+    align-items: stretch;
+}
+.bgOrange{
+    background-color: #EA8300;
+    color: #FFFFFF;
+}
+.machine{
+    flex: 2 0 0;
+}
+.good{
+    margin-left: 5px;
+    flex: 1 0 0;
+}
