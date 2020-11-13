@@ -11,19 +11,16 @@ const useFetch = ({ client, server }) => {
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        const fetchResource = async () => {
-            try {
-                await socket.emit(client, null)
-                await socket.on(server, data => {
-                    setLoading(false)
-                    setData(data)
-                })
-            } catch (error) {
+        try {
+            socket.emit(client, null)
+            socket.on(server, data => {
                 setLoading(false)
-                setError(error)
-            }
+                setData(data)
+            })
+        } catch (error) {
+            setLoading(false)
+            setError(error)
         }
-        fetchResource()
     }, [client, server])
 
     return { data, loading, error }

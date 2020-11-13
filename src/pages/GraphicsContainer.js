@@ -10,9 +10,14 @@ const GraphicsContainer = () => {
         client: "getInfo",
         server: "information"
     }
+
     const { data, loading, error } = useFetch(events)
 
-    console.log(data)
+    //console.log(data)
+
+    /* document.gauges.forEach(function (gauge) {
+        console.log(gauge.type);
+    }); */
 
     if(loading)
         return <Loading />
@@ -23,6 +28,7 @@ const GraphicsContainer = () => {
     return <Graphics
         data={data}            
     />
+    
 }
 
 export default GraphicsContainer

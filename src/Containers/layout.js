@@ -1,19 +1,15 @@
 import React, { Component } from 'react'
-import { Container, Row } from 'reactstrap'
 import { Route, Switch } from 'react-router-dom'
-import 'canvas-gauges/gauge.min.js'
+import routes from '../routes' 
 
 import Header from '../Components/Header'
-
-import routes from '../routes' 
 
 class layout extends Component {
     render() {
         return (
             <React.Fragment>
                 <Header />
-                <Container>
-                    <Row>
+                <div className="container">
                         <Switch>
                             {routes.map((r, i) => {
                                 return r.Component ? (
@@ -27,8 +23,7 @@ class layout extends Component {
                             })
                             }
                         </Switch>
-                    </Row>
-                </Container>
+                </div>
             </React.Fragment>
         );
     }
