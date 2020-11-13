@@ -46,6 +46,7 @@ a{
 .status{
     display: flex;
     align-items: stretch;
+    margin-top: 5px;
 }
 .bgOrange{
     background-color: #EA8300;
