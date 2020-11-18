@@ -44,18 +44,41 @@ a{
     justify-content: center;
 }
 .status{
+    width: 99.5%;
+    margin-top: 0.3125rem;
+    margin-bottom: 2rem;
     display: flex;
     align-items: stretch;
-    margin-top: 5px;
 }
 .bgOrange{
     background-color: #EA8300;
     color: #FFFFFF;
 }
+.bgGrey{
+    background-color: #E7E7E7;
+    color: #4A4F55;
+}
 .machine{
-    flex: 2 0 0;
+    width: 79%;
+    padding-left: 4%;
+    padding-top: 2%;
 }
 .good{
-    margin-left: 5px;
-    flex: 1 0 0;
+    padding: 0% !important;
+    margin-left: 0.3125rem;
+    width: 20%;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title-good{
+    height: 35%;
+    width: 100%;
+}
+.count-good{
+    height: 65%;
+    width: 100%;
+    font-size: 4rem;
 }

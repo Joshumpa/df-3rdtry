@@ -11,9 +11,9 @@ const GraphicsContainer = () => {
         server: "information"
     }
 
-    const { data, loading, error } = useFetch(events)
+    const { gInfo, time, goodData, accumulatedData, loading, error } = useFetch(events)
 
-    //console.log(data)
+    console.log(accumulatedData.length)
 
     /* document.gauges.forEach(function (gauge) {
         console.log(gauge.type);
@@ -26,7 +26,9 @@ const GraphicsContainer = () => {
         return <FatalError />
 
     return <Graphics
-        data={data}            
+        goodData={goodData}
+        gInfo={gInfo}
+        time={time}         
     />
     
 }

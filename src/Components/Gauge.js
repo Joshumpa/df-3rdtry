@@ -9,7 +9,7 @@ function Gauge({ Variable, Max, Min, Measure, MajorTicks, NotSat, Value }) {
             data-height="224"
             data-units={Measure}
             data-title={Variable}
-            data-min-value={Value}
+            data-min-value="0"
             data-max-value={Max}
             data-value={Value}
             data-major-ticks={MajorTicks}

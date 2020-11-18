@@ -6,7 +6,7 @@ let io = require('socket.io')(http);
 
 const sql = require('mssql');
 
-const port = 3000
+const port = 3001
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -38,17 +38,16 @@ io.on('connection', (socket) => {
 
             result1 = Object.values(result1)[1];
             let info = result1.filter(obj => obj.Variable !== "Good")
+            info = info.map(element => ({ ...element, MajorTicks: script.calcTicks(element["Max"]) }))
+            
             let st = result1.filter(obj => obj.Variable === "Good")
 
             const good = st[0].Value
             const time = st[0].Time.toUTCString().substring(0, 25)
 
-            //console.dir(info)
+            let acc = info.reduce((acc, cur) => ({ ...acc, [cur.Variable]: cur.Value }), {})
 
-            info = info.map(element => ({ ...element, MajorTicks: script.calcTicks(element["Max"]) }))
-
-
-            io.to(socket.id).emit('information', { info, good, time })
+            io.to(socket.id).emit('information', { info, good, time, acc })
 
             status = true
 

@@ -5,8 +5,8 @@ import NotFound from './pages/404'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
-    { path: "/", exact: true, Component: Graphics },
-    { path: "/Main", Component: Main },
+    { path: "/", exact: true, Component: Main },
+    { path: "/Graphics", Component: Graphics },
     { path: "/Data", Component: Data },
     { Component: NotFound }
 ];

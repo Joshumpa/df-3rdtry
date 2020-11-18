@@ -1,22 +1,21 @@
 import React, { Fragment } from 'react'
 import Status from '../Components/Status'
 import GaugeList from '../Components/GaugeList'
-import { Row } from 'reactstrap'
 //import '../Components/styles/styles.css'
 
-const Graphics = ({ data }) => (
+const Graphics = ({  gInfo, time, goodData }) => (
     <Fragment>
-        <Row>
+        <div className="row status">
             <Status
-                good={data.good}
-                time={data.time}
+                good={goodData}
+                time={time}
             />
-        </Row>
-        <Row>
+        </div>
+        <div className="row">
             <GaugeList
-                info={data.info}
+                info={gInfo}
             />
-        </Row>
+        </div>
     </Fragment>
 )
 
