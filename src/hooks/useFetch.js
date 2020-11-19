@@ -5,7 +5,7 @@ const socket = io('http://localhost:3001', {
     transports: ['websocket', 'polling']
 });
 
-const useFetch = ({ client, server, table, machine }) => {
+const useFetch = ({ client, server, machine }) => {
     const [gaugeInfo, setGInfo] = useState([])
     const [time, setTime] = useState([])
     const [accumulatedData, setAccumulatedData] = useState([])
@@ -15,7 +15,7 @@ const useFetch = ({ client, server, table, machine }) => {
 
     useEffect(() => {
         try {
-            socket.emit(client, {table, machine})
+            socket.emit(client, {machine})
             socket.on(server, data => {
                 setLoading(false)
                 setGInfo(data.gaugeInfo)
@@ -27,7 +27,7 @@ const useFetch = ({ client, server, table, machine }) => {
             setLoading(false)
             setError(error)
         }
-    }, [client, server, table, machine])
+    }, [client, server, machine])
 
     
     if (accumulatedData.length>10) {

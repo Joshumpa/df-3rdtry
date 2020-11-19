@@ -1,6 +1,6 @@
 import { React, Fragment } from 'react'
 
-function Welcome({ goodData, time }) {
+function Welcome({ machine, good, time }) {
   return (
     <Fragment>
       <div className="machine bgOrange">
@@ -11,7 +11,7 @@ function Welcome({ goodData, time }) {
         <div className="bgGrey center title-good">
           <h3>Good Pieces</h3>
         </div>
-        <div className="bgOrange center count-good">{goodData}</div>
+        <div className="bgOrange center count-good">{good}</div>
       </div>
     </Fragment>
   )

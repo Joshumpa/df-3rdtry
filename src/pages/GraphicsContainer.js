@@ -6,41 +6,39 @@ import useFetch from '../hooks/useFetch'
 import 'canvas-gauges/gauge.min.js'
 
 const GraphicsContainer = () => {
+
     let tab = {
         client: "getInfo",
         server: "information",
-        table: "HydraDataL3",
         machine: "Molder-A04"
     }
 
     const { gaugeInfo, goodData, time, accumulatedData, loading, error } = useFetch(tab)
 
-    console.log(accumulatedData.length)
-    console.log(gaugeInfo)
-    console.log(goodData)
-    console.log(time)
+    //console.log(accumulatedData.length)
 
-    /* document.gauges.forEach(function (gauge) {
-        console.log(gauge.type);
-    }); */
-
-    if(loading)
+    if (loading)
         return <Loading />
-            
-    if(error)
+
+    if (error)
         return <FatalError />
 
     return <Graphics
         goodData={goodData}
         gaugeInfo={gaugeInfo}
-        time={time}         
+        time={time}
     />
-    
+
+    /* document.gauges.forEach(function (gauge) {
+        console.log(gauge.type);
+    }); */
+
+
 }
 
 export default GraphicsContainer
 
-/* 
+/*
 
 var timers = [];
 

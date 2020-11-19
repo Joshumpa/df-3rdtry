@@ -1,12 +1,12 @@
-const setQuery = (table, machine) => {
+const setQuery = (machine) => {
     return `SELECT A.Time, A.Variable, A.Value, C.Measure, C.Machine, C.Max, C.Min, C.NotSat
     FROM (SELECT Time, Variable, Machine, Value
-            FROM ${table}            
+            FROM HydraDataL3           
             WHERE Machine='${machine}' ) AS A,
         (SELECT Variable, Max(Time) AS Time
-            FROM ${table}             
+            FROM HydraDataL3             
             WHERE Variable in('Cycle','Good','PeakPrs','Mcushion','InjTime','Recovtime')
-            GROUP BY Variable) AS B, ${table}_Catalog AS C
+            GROUP BY Variable) AS B, HydraDataL3_Catalog AS C
     WHERE A.Variable = B.Variable and A.Time = B.Time AND A.Variable = C.Variable AND A.Machine = C.Machine
     ORDER BY Variable`
 }

@@ -46,7 +46,7 @@ a{
 .status{
     width: 99.5%;
     margin-top: 0.3125rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0.3125rem;
     display: flex;
     align-items: stretch;
 }
@@ -81,4 +81,11 @@ a{
     height: 65%;
     width: 100%;
     font-size: 4rem;
+}
+.gaugeTitle{
+    width: 14rem;
+}
+.gauge{
+    width: 300px !important;
+    height: 300px !important;
 }

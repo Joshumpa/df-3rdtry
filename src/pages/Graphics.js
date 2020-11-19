@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react'
 import Status from '../Components/Status'
 import GaugeList from '../Components/GaugeList'
-//import '../Components/styles/styles.css'
 
-const Graphics = ({  gaugeInfo, time, goodData }) => (
+const Graphics = ({  goodData, time, gaugeInfo }) => (
     <Fragment>
         <div className="row status">
             <Status
@@ -11,6 +10,7 @@ const Graphics = ({  gaugeInfo, time, goodData }) => (
                 time={time}
             />
         </div>
+        {/* <div className="row bgGrey title-good "> <h3>Graphic representation of Variables</h3> </div> */}
         <div className="row">
             <GaugeList
                 info={gaugeInfo}

@@ -5,12 +5,20 @@ let http = require('http').createServer(app);
 let io = require('socket.io')(http);
 
 const sql = require('mssql');
+const config = {
+  user: 'spark',
+  password: 'spark',
+  server: 'MXL30DB100',
+  database: 'SparkDB-IND',
+  port: 1433,
+  requestTimeout: 300000,
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000
+  }
+}
 const port = 3001
-
-sql.connect("mssql://spark:spark@MXL30DB100/SparkDB-IND");
-sql.on('error', err => {
-  console.log("ERROR: La conexión no fue establecida correctamente")
-})
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -20,45 +28,34 @@ io.on('connection', (socket) => {
 
   console.log('a user connected...');
 
-  socket.on('getInfo', ({table, machine}) => {
-
-    let status = true
+  socket.on('getInfo', ({ machine }) => {
 
     setInterval(() => {
 
-      if (status) {
-        status = false
+      sql.connect(config).then(() => {
+        return new sql.Request().query(script.setQuery(machine));
+      }).then(result1 => {
 
-        try {
-          
-          new sql.Request().query(script.setQuery(table, machine), (err, result1) => {
+        result1 = Object.values(result1)[1];
 
-            if (err) { throw new Error('Failed SQL'); }
+        let gaugeInfo = result1.filter(obj => obj.Variable !== "Good")
+        gaugeInfo = gaugeInfo.map(element => ({ ...element, MajorTicks: script.calcTicks(element["Max"]) }))
 
-            result1 = Object.values(result1)[1];
+        let st = result1.filter(obj => obj.Variable === "Good")
 
-            let gaugeInfo = result1.filter(obj => obj.Variable !== "Good")
-            gaugeInfo = gaugeInfo.map(element => ({ ...element, MajorTicks: script.calcTicks(element["Max"]) }))
+        let accumulatedData = gaugeInfo.reduce((accumulatedData, cur) => ({ ...accumulatedData, [cur.Variable]: cur.Value }), {})
+        accumulatedData.name = st[0].Time.toLocaleTimeString('en-US')
 
-            let st = result1.filter(obj => obj.Variable === "Good")
+        const time = st[0].Time.toUTCString().substring(0, 25)
+        let goodData = st[0].Value
 
-            let accumulatedData = gaugeInfo.reduce((accumulatedData, cur) => ({ ...accumulatedData, [cur.Variable]: cur.Value }), {})
-            accumulatedData.name = st[0].Time.toLocaleTimeString('en-US')
+        io.to(socket.id).emit('information', { gaugeInfo, goodData, time, accumulatedData })
+      }).catch(err => {
+        console.log("--- Error ---", err)
+      })
 
-            const time = st[0].Time.toUTCString().substring(0, 25)
-            let goodData = st[0].Value
-
-            io.to(socket.id).emit('information', { gaugeInfo, goodData, time, accumulatedData })
-
-            status = true
-
-          });
-
-        } catch (err) {
-          console.log("ERROR: La query no fue elaborada correctamente")
-        }
-      }
     }, 6000);
+
   })
 
   socket.on('getValues', () => {
@@ -99,3 +96,41 @@ io.on('connection', (socket) => {
 http.listen(port, () => {
   console.log(`listening on *: ${port}`);
 });
+
+/* let status = true
+
+    setInterval(() => {
+
+      if (status) {
+        status = false
+
+        try {
+          
+          new sql.Request().query(script.setQuery(table, machine), (err, result1) => {
+
+            if (err) { throw new Error('Failed SQL'); }
+
+            result1 = Object.values(result1)[1];
+
+            let gaugeInfo = result1.filter(obj => obj.Variable !== "Good")
+            gaugeInfo = gaugeInfo.map(element => ({ ...element, MajorTicks: script.calcTicks(element["Max"]) }))
+
+            let st = result1.filter(obj => obj.Variable === "Good")
+
+            let accumulatedData = gaugeInfo.reduce((accumulatedData, cur) => ({ ...accumulatedData, [cur.Variable]: cur.Value }), {})
+            accumulatedData.name = st[0].Time.toLocaleTimeString('en-US')
+
+            const time = st[0].Time.toUTCString().substring(0, 25)
+            let goodData = st[0].Value
+
+            io.to(socket.id).emit('information', { gaugeInfo, goodData, time, accumulatedData })
+
+            status = true
+
+          });
+
+        } catch (err) {
+          console.log("ERROR: La query no fue elaborada correctamente")
+        }
+      }
+    }, 6000); */

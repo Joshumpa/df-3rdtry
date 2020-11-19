@@ -16,9 +16,9 @@ function Gauge({ Variable, Max, Min, Measure, MajorTicks, NotSat, Value }) {
             data-minor-ticks="2"
             data-stroke-ticks="true"
             data-highlights={`[
-                {"from": 0, "to": ${NotSat}, "color": "rgba(200, 50, 50, .75)"},
-                {"from": ${NotSat}, "to": ${Min}, "color": "rgba(200, 200, 50, .75)"}
-            ]`}
+                    {"from": 0, "to": ${NotSat}, "color": "rgba(200, 50, 50, .75)"},
+                    {"from": ${NotSat}, "to": ${Min}, "color": "rgba(200, 200, 50, .75)"}
+                ]`}
             data-color-plate="#fff"
             data-border-shadow-width="0"
             data-borders="false"
