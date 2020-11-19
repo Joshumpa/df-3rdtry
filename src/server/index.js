@@ -5,8 +5,12 @@ let http = require('http').createServer(app);
 let io = require('socket.io')(http);
 
 const sql = require('mssql');
-
 const port = 3001
+
+sql.connect("mssql://spark:spark@MXL30DB100/SparkDB-IND");
+sql.on('error', err => {
+  console.log("ERROR: La conexión no fue establecida correctamente")
+})
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -15,39 +19,36 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
 
   console.log('a user connected...');
-  sql.connect("mssql://spark:spark@MXL30DB100/SparkDB-IND");
 
-  sql.on('error', err => {
-    console.log("ERROR: La conexión no fue establecida correctamente")
-  })
-
-  socket.on('getInfo', () => {
+  socket.on('getInfo', ({table, machine}) => {
 
     let status = true
 
     setInterval(() => {
 
       if (status) {
-
         status = false
+
         try {
-          //Query.setQuery('HydraDataL3')
-          new sql.Request().query( script.setQuery('HydraDataL3'), (err, result1) => {
+          
+          new sql.Request().query(script.setQuery(table, machine), (err, result1) => {
 
             if (err) { throw new Error('Failed SQL'); }
 
             result1 = Object.values(result1)[1];
-            let info = result1.filter(obj => obj.Variable !== "Good")
-            info = info.map(element => ({ ...element, MajorTicks: script.calcTicks(element["Max"]) }))
-            
+
+            let gaugeInfo = result1.filter(obj => obj.Variable !== "Good")
+            gaugeInfo = gaugeInfo.map(element => ({ ...element, MajorTicks: script.calcTicks(element["Max"]) }))
+
             let st = result1.filter(obj => obj.Variable === "Good")
 
-            const good = st[0].Value
+            let accumulatedData = gaugeInfo.reduce((accumulatedData, cur) => ({ ...accumulatedData, [cur.Variable]: cur.Value }), {})
+            accumulatedData.name = st[0].Time.toLocaleTimeString('en-US')
+
             const time = st[0].Time.toUTCString().substring(0, 25)
+            let goodData = st[0].Value
 
-            let acc = info.reduce((acc, cur) => ({ ...acc, [cur.Variable]: cur.Value }), {})
-
-            io.to(socket.id).emit('information', { info, good, time, acc })
+            io.to(socket.id).emit('information', { gaugeInfo, goodData, time, accumulatedData })
 
             status = true
 

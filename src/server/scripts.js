@@ -1,10 +1,13 @@
-const setQuery = (machine) => {
+const setQuery = (table, machine) => {
     return `SELECT A.Time, A.Variable, A.Value, C.Measure, C.Machine, C.Max, C.Min, C.NotSat
-    FROM ${machine} AS A, (SELECT Variable, Max(Time) AS Time
-            FROM ${machine}
+    FROM (SELECT Time, Variable, Machine, Value
+            FROM ${table}            
+            WHERE Machine='${machine}' ) AS A,
+        (SELECT Variable, Max(Time) AS Time
+            FROM ${table}             
             WHERE Variable in('Cycle','Good','PeakPrs','Mcushion','InjTime','Recovtime')
-            GROUP BY Variable) AS B, ${machine}_Catalog AS C
-    WHERE A.Variable = B.Variable and A.Time = B.Time AND A.Variable = C.Variable
+            GROUP BY Variable) AS B, ${table}_Catalog AS C
+    WHERE A.Variable = B.Variable and A.Time = B.Time AND A.Variable = C.Variable AND A.Machine = C.Machine
     ORDER BY Variable`
 }
 
@@ -33,5 +36,10 @@ const calcTicks = (max) => {
     }
 }
 
+const calcPercent = (value, max) => {
+    return Math.floor((value / max) * 100)
+}
+
+exports.calcPercent = calcPercent
 exports.setQuery = setQuery
 exports.calcTicks = calcTicks

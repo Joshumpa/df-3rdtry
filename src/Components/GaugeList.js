@@ -2,9 +2,9 @@ import React, { Fragment } from 'react'
 import Gauge from './Gauge'
 
 
-const GaugeList = ({info}) => (
+const GaugeList = ({gaugeInfo}) => (
     <Fragment>
-        { info?.map((gauge) => (
+        { gaugeInfo?.map((gauge) => (
             <Gauge
                 key = {gauge.Variable}
                 {...gauge}

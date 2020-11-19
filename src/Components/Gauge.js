@@ -1,4 +1,4 @@
-import React from 'react'
+//import React from 'react'
 import 'canvas-gauges/gauge.min.js'
 
 function Gauge({ Variable, Max, Min, Measure, MajorTicks, NotSat, Value }) {
