@@ -27,6 +27,7 @@ const GraphicsContainer = () => {
         goodData={goodData}
         gaugeInfo={gaugeInfo}
         time={time}
+        accumulatedData={accumulatedData}
     />
 
     /* document.gauges.forEach(function (gauge) {

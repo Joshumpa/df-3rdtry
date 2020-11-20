@@ -89,3 +89,8 @@ a{
     width: 300px !important;
     height: 300px !important;
 }
+.section-title{
+    height: 35%;
+    width: 99.5%;
+    margin-bottom: 2rem;
+}

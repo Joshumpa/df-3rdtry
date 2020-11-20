@@ -30,7 +30,7 @@ const useFetch = ({ client, server, machine }) => {
     }, [client, server, machine])
 
     
-    if (accumulatedData.length>10) {
+    if (accumulatedData.length>20) {
         accumulatedData.shift()
     }
 
