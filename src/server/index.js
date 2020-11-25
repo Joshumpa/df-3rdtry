@@ -30,7 +30,6 @@ io.on('connection', (socket) => {
 
   socket.on('getInfo', ({ machine }) => {
 
-    //setInterval(() => {
 
       sql.connect(config).then(() => {
         return new sql.Request().query(script.setQuery(machine));
@@ -54,8 +53,6 @@ io.on('connection', (socket) => {
       }).catch(err => {
         console.log("--- Error ---", err)
       })
-
-    //}, 10000);
 
   })
 

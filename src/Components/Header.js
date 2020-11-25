@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom'
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavbarText, NavLink, NavItem, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavbarText, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, } from 'reactstrap';
 //import '../Components/styles/styles.css'
 import logo from '../images/logo.png'
 
@@ -12,7 +12,7 @@ const Header = (props) => {
   return (
     <Fragment>
       <Navbar className="nav" color="faded" dark expand="md">
-        <NavbarBrand className="nav-brand" tag={Link} to="/"><img src={logo} className="logo" alt="Company Logo" /></NavbarBrand>
+        <NavbarBrand className="nav-brand" href="https://www.te.com/usa-en/home.html"><img src={logo} className="logo" alt="Company Logo" /></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -30,9 +30,9 @@ const Header = (props) => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-            <NavItem>
+            {/* <NavItem>
               <NavLink tag={Link} to='/Data'>Data</NavLink>
-            </NavItem>
+            </NavItem> */}
           </Nav>
           <NavbarText className="nav-item">Molding V1.3.5</NavbarText>
         </Collapse>
