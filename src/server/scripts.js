@@ -1,14 +1,18 @@
 const setQuery = (machine) => {
-    return `SELECT A.Time, A.Variable, A.Value, C.Measure, C.Machine, C.Max, C.Min, C.NotSat
-    FROM (SELECT Time, Variable, Machine, Value
-            FROM HydraDataL3           
-            WHERE Machine='${machine}' ) AS A,
-        (SELECT Variable, Max(Time) AS Time
-            FROM HydraDataL3             
-            WHERE Variable in('Cycle','Good','PeakPrs','Mcushion','InjTime','Recovtime')
-            GROUP BY Variable) AS B, HydraDataL3_Catalog AS C
-    WHERE A.Variable = B.Variable and A.Time = B.Time AND A.Variable = C.Variable AND A.Machine = C.Machine
-    ORDER BY Variable`
+    return `
+SELECT A.Time, A.Variable, A.Value, C.Measure, C.Machine, C.Max, C.Min, C.NotSat
+FROM (SELECT Time, Variable, Machine, Value
+		FROM HydraDataL3           
+        WHERE Machine='${machine}' ) AS A,
+	(SELECT Variable, MAX(Time) AS Time
+		FROM (SELECT *
+				FROM HydraDataL3
+				WHERE Machine='${machine}') AS A
+		WHERE Variable in('Cycle','Good','PeakPrs','Mcushion','InjTime','Recovtime')
+		GROUP BY Variable) AS B, HydraDataL3_Catalog AS C
+WHERE A.Variable = B.Variable and A.Time = B.Time AND A.Variable = C.Variable AND A.Machine = C.Machine
+ORDER BY Variable
+`
 }
 
 const calcTicks = (max) => {

@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
 
   socket.on('getInfo', ({ machine }) => {
 
-    setInterval(() => {
+    //setInterval(() => {
 
       sql.connect(config).then(() => {
         return new sql.Request().query(script.setQuery(machine));
@@ -42,6 +42,7 @@ io.on('connection', (socket) => {
         gaugeInfo = gaugeInfo.map(element => ({ ...element, MajorTicks: script.calcTicks(element["Max"]) }))
 
         let st = result1.filter(obj => obj.Variable === "Good")
+        console.log(st[0].Machine)
 
         let accumulatedData = gaugeInfo.reduce((accumulatedData, cur) => ({ ...accumulatedData, [cur.Variable]: cur.Value }), {})
         accumulatedData.name = st[0].Time.toLocaleTimeString('en-US')
@@ -54,9 +55,13 @@ io.on('connection', (socket) => {
         console.log("--- Error ---", err)
       })
 
-    }, 6000);
+    //}, 10000);
 
   })
+
+  socket.on('disconnect', () => {
+    console.log('...user disconnected');
+  });
 
   socket.on('getValues', () => {
 
@@ -87,10 +92,6 @@ io.on('connection', (socket) => {
 
   })
 
-  socket.on('disconnect', () => {
-    console.log('...user disconnected');
-  });
-
 });
 
 http.listen(port, () => {
@@ -105,7 +106,7 @@ http.listen(port, () => {
         status = false
 
         try {
-          
+
           new sql.Request().query(script.setQuery(table, machine), (err, result1) => {
 
             if (err) { throw new Error('Failed SQL'); }

@@ -1,11 +1,11 @@
 import { React, Fragment } from 'react'
 
-function Welcome({ machine, good, time }) {
+function Welcome({ title, good }) {
   return (
     <Fragment>
-      <div className="machine bgOrange">
-        <h1>Molder-A04</h1>
-        <p>Lastest Update: {time}</p>
+      <div className="machine center bgOrange">
+        <b>{title}</b>
+        {/* <p>Lastest Update: {time}</p> */}
       </div>
       <div className="col center good bgOrange">
         <div className="bgGrey center title-good">

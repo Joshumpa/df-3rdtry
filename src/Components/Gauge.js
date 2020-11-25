@@ -5,8 +5,8 @@ function Gauge({ Variable, Max, Min, Measure, MajorTicks, NotSat, Value }) {
 
     return (
         <canvas data-type="radial-gauge"
-            data-width="224" //14rem
-            data-height="224"
+            data-width="250" //224px - 14rem
+            data-height="250"
             data-units={Measure}
             data-title={Variable}
             data-min-value="0"

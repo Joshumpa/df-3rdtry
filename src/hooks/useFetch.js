@@ -15,13 +15,25 @@ const useFetch = ({ client, server, machine }) => {
 
     useEffect(() => {
         try {
-            socket.emit(client, {machine})
+            var delay = ( function() {
+                var timer = 0;
+                return function(callback, ms) {
+                    clearTimeout (timer);
+                    timer = setInterval(callback, ms);
+                };
+            })();
+            delay(function(){
+                socket.emit(client, { machine })
+            }, 10000 );
+            //setInterval(() => {
+            //}, 10000);
             socket.on(server, data => {
                 setLoading(false)
                 setGInfo(data.gaugeInfo)
                 setTime(data.time)
                 setGoodData(data.goodData)
                 setAccumulatedData(accData => [...accData, data.accumulatedData])
+                //socket.emit(client, {machine})
             })
         } catch (error) {
             setLoading(false)
@@ -29,8 +41,8 @@ const useFetch = ({ client, server, machine }) => {
         }
     }, [client, server, machine])
 
-    
-    if (accumulatedData.length>20) {
+
+    if (accumulatedData.length > 50) {
         accumulatedData.shift()
     }
 

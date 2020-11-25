@@ -1,53 +1,45 @@
 import React, { Fragment } from 'react';
-import { XAxis, YAxis, CartesianGrid, Tooltip, Brush, AreaChart, Area, Legend } from 'recharts';
+import { XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, Area } from 'recharts';
 
 function Chart({ data }) {
     return (
         <Fragment>
-            <AreaChart width={600} height={250} data={data} syncId="anyId"
+            <AreaChart width={250} height={150} data={data} syncId="anyId"
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                {/* <XAxis dataKey="name" tick="|" /> */}
+                <YAxis type="number" tick="|" domain={['auto', 'auto']} />
                 <Tooltip />
                 <Area type='monotone' dataKey="Cycle" stroke='#EA8300' fill='#EA8300' />
-                <Legend width={100} wrapperStyle={{ top: 40, right: 20, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
+                {/* <Legend width={100} wrapperStyle={{ top: 40, right: 20, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} /> */}
             </AreaChart>
-            <AreaChart width={600} height={250} data={data} syncId="anyId"
+            <AreaChart width={250} height={150} data={data} syncId="anyId"
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <YAxis type="number" domain={['auto', 'auto']} />
                 <Tooltip />
                 <Area type='monotone' dataKey="InjTime" stroke='#4A4F55' fill='#4A4F55' />
-                <Legend width={100} wrapperStyle={{ top: 40, right: 20, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
             </AreaChart>
-            <AreaChart width={600} height={250} data={data} syncId="anyId"
+            <AreaChart width={250} height={150} data={data} syncId="anyId"
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <YAxis type="number" domain={['auto', 'auto']} />
                 <Tooltip />
-                <Area type='monotone' dataKey="MCushion" stroke='#4A4F55' fill='#4A4F55' />
-                <Legend width={120} wrapperStyle={{ top: 40, right: 20, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
+                <Area type='monotone' dataKey="MCushion" stroke='#EA8300' fill='#EA8300' />
             </AreaChart>
-            <AreaChart width={600} height={250} data={data} syncId="anyId"
+            <AreaChart width={250} height={150} data={data} syncId="anyId"
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <YAxis type="number" domain={['auto', 'auto']} />
                 <Tooltip />
-                <Area type='monotone' dataKey="PeakPrs" stroke='#EA8300' fill='#EA8300' />
-                <Legend width={100} wrapperStyle={{ top: 40, right: 20, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
+                <Area type='monotone' dataKey="PeakPrs" stroke='#4A4F55' fill='#4A4F55' />
             </AreaChart>
-            <AreaChart width={600} height={250} data={data} syncId="anyId"
+            <AreaChart width={250} height={150} data={data} syncId="anyId"
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <YAxis type="number" domain={['auto', 'auto']} />
                 <Tooltip />
                 <Area type='monotone' dataKey="RecovTime" stroke='#EA8300' fill='#EA8300' />
-                <Legend width={150} wrapperStyle={{ top: 40, right: 20, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
             </AreaChart>
         </Fragment>
     )
