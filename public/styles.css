@@ -59,6 +59,10 @@ a{
     background-color: #E7E7E7;
     color: #4A4F55;
 }
+.bgDarkGrey{
+    background-color: #4A4F55;
+    color: #FFFFFF;
+}
 .machine{
     width: 79%;
     font-size: 5rem;
@@ -96,4 +100,31 @@ a{
 }
 .margin-bottom{
     margin-bottom: 4rem;
+}
+.main-title{
+    font-size: 5rem;
+    padding: 2rem;
+    width: 99.5%;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+.description{
+    width: 99.5%;
+    display: flex;
+}
+.desc-img{
+    width: 70%;
+    overflow: hidden; 
+}
+.desc-img img { 
+    max-width: 100%;
+    height: auto;
+    margin-top: -10%;
+    margin-bottom: -10%;
+}
+.desc-txt{
+    height: 28.2rem;
+    width: 30%;
+    font-size: 2rem;
 }

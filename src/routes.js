@@ -1,6 +1,6 @@
 import MolderA04 from "./pages/MolderA04"
 import MolderA10 from './pages/MolderA10'
-import Main from "./Components/Main"
+import Main from "./pages/Main"
 import Data from "./Components/Data"
 //import Tabs from "./Components/Tabs"
 import NotFound from './pages/404'
