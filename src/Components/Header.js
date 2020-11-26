@@ -12,7 +12,7 @@ const Header = (props) => {
   return (
     <Fragment>
       <Navbar className="nav" color="faded" dark expand="md">
-        <NavbarBrand className="nav-brand" href="https://www.te.com/usa-en/home.html"><img src={logo} className="logo" alt="Company Logo" /></NavbarBrand>
+        <NavbarBrand className="nav-brand" tag={Link} to='/'><img src={logo} className="logo" alt="Company Logo" /></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
