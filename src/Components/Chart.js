@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { YAxis, Tooltip, AreaChart, Area } from 'recharts';
+import { XAxis, YAxis, Tooltip, AreaChart, Area } from 'recharts';
 
 function Chart({ data }) {
     return (
@@ -7,7 +7,7 @@ function Chart({ data }) {
             <AreaChart width={250} height={150} data={data} syncId="anyId"
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                {/* <XAxis dataKey="name" tick="|" /> */}
+                <XAxis dataKey="name"/>
                 <YAxis type="number" domain={['auto', 'auto']} />
                 <Tooltip />
                 <Area type='monotone' dataKey="Cycle" stroke='#EA8300' fill='#EA8300' />

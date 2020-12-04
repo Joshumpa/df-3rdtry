@@ -8,7 +8,7 @@ import 'canvas-gauges/gauge.min.js'
 const MolderA10 = () => {
     
     const machine = "Molder-A10"
-    const server = "Molder-A04"
+    const server = "Molder-A10"
     const { gaugeInfo, goodData, time, accumulatedData, loading, error } = useFetch(server)
 
     if (loading)

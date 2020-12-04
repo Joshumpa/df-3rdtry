@@ -11,7 +11,7 @@ const Graphics = ({ machine, goodData, time, gaugeInfo, accumulatedData }) => (
                 good={goodData}
             />
         </div>
-        <div className="row bgGrey section-title"> <h3>Lastest Update: {time}</h3> </div>
+        <div className="row bgGrey section-title"> <h1>Lastest Update: <b>{time}</b></h1> </div>
         <div className="row">
             <GaugeList
                 info={gaugeInfo}
