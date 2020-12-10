@@ -5,7 +5,6 @@ function Welcome({ title, good }) {
     <Fragment>
       <div className="machine center bgOrange">
         <b>{title}</b>
-        {/* <p>Lastest Update: {time}</p> */}
       </div>
       <div className="col center good bgOrange">
         <div className="bgGrey center title-good">

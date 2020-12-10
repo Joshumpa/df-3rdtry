@@ -16,8 +16,12 @@ const useFetch = (server) => {
     useEffect(() => {
         try {
             socket.on(server, data => {
+
                 setLoading(false)
-                setGInfo(data.gaugeInfo)
+                if (data.gaugeInfo.length === 5) {
+
+                    setGInfo(data.gaugeInfo)
+                }
                 setTime(data.time)
                 setGoodData(data.goodData)
                 setAccumulatedData(accData => [...accData, data.accumulatedData])
@@ -28,7 +32,6 @@ const useFetch = (server) => {
         }
 
     }, [server])
-
 
     if (accumulatedData.length > 30) {
         accumulatedData.shift()

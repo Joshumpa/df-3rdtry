@@ -6,10 +6,9 @@ import useFetch from '../hooks/useFetch'
 import 'canvas-gauges/gauge.min.js'
 
 const MolderA10 = () => {
-    
+
     const machine = "Molder-A10"
-    const server = "Molder-A10"
-    const { gaugeInfo, goodData, time, accumulatedData, loading, error } = useFetch(server)
+    const { gaugeInfo, goodData, time, accumulatedData, loading, error } = useFetch(machine)
 
     if (loading)
         return <Loading />

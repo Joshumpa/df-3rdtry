@@ -6,10 +6,9 @@ import useFetch from '../hooks/useFetch'
 import 'canvas-gauges/gauge.min.js'
 
 const MolderA10 = () => {
-    
+
     const machine = "Molder-A04"
-    const server = "Molder-A04"
-    const { gaugeInfo, goodData, time, accumulatedData, loading, error } = useFetch(server)
+    const { gaugeInfo, goodData, time, accumulatedData, loading, error } = useFetch(machine)
 
     if (loading)
         return <Loading />
@@ -28,24 +27,3 @@ const MolderA10 = () => {
 }
 
 export default MolderA10
-
-//console.log(accumulatedData.length)
-/* document.gauges.forEach(function (gauge) {
-    console.log(gauge.type);
-}); */
-
-/*
-
-var timers = [];
-
-function animateGauges() {
-    document.gauges.forEach(function(gauge) {
-        timers.push(setInterval(function() {
-            gauge.value = Math.random() *
-                (gauge.options.maxValue - gauge.options.minValue) +
-                gauge.options.minValue;
-        }, gauge.animation.duration + 50));
-    });
-}
-
-*/

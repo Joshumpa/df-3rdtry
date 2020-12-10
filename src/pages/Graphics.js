@@ -17,7 +17,6 @@ const Graphics = ({ machine, goodData, time, gaugeInfo, accumulatedData }) => (
                 info={gaugeInfo}
             />
         </div>
-        {/* <div className="row bgGrey section-title"> <h3> Graphic Representation Of Variables Over Time </h3> </div> */}
         <div className="row margin-bottom">
             <Chart
                 data={accumulatedData}

@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom'
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavbarText, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, } from 'reactstrap';
-//import '../Components/styles/styles.css'
 import logo from '../images/logo.png'
 
 const Header = (props) => {
